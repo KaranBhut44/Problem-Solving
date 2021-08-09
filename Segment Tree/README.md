@@ -1,4 +1,4 @@
-# Array Problems
+# Segment Tree Problems
 
 ## 1. Static Range Sum Queries: (CSES) | [Problem Link](https://cses.fi/problemset/task/1646)  
 **Problem Statement:** Given an array of n integers, Process q queries of the form: 
