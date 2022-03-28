@@ -12,15 +12,8 @@ public:
         q.push({start[0],start[1]});
         int n = maze.size();
         int m = maze[0].size();
-        bool **visited = new bool*[n];
-        for(int i=0;i<n;i++)
-        {
-            visited[i] = new bool[m];
-            for(int j=0;j<m;j++)
-            {
-                visited[i][j] = false;
-            }
-        }
+        bool visited[n][m];
+        memset(visited,false,sizeof(visited));
         visited[start[0]][start[1]] = true;
         while(!q.empty())
         {
