@@ -6,9 +6,8 @@ public:
         {
             adj[edge[1]].push_back(edge[0]);
         }
-	    // code here
 	    queue<int>q;
-	    
+	    int count = 0;
 	    int indegree[V];
         memset(indegree,0,sizeof(indegree));
 	    for(int i=0;i<V;i++)
@@ -33,6 +32,7 @@ public:
 	    {
 	        int vertex = q.front();
 	        q.pop();
+            count++;
 	        ans.push_back(vertex);
 	        for(auto i:adj[vertex])
 	        {
@@ -44,12 +44,8 @@ public:
 	            }
 	        }
 	    }
-        for(int i=0;i<V;i++)
-        {
-            if(indegree[i] != 0)
-                return {};
-        }
-	    
+        if(count != V)
+            return {};
 	    return ans;
     }
 };
