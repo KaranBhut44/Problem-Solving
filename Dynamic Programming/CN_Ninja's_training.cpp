@@ -1,21 +1,26 @@
 #include<bits/stdc++.h>
-int fun(int n, vector<vector<int>> &points,int **dp,int index)
+int fun(int n, vector<vector<int>> &points,int **dp,int last)
 {
 	int max_val = INT_MIN;
-	if(n < 0)
-		return 0;
-	if(dp[n][index] > -1)
-		return dp[n][index];
 	if(n == 0)
 	{
-		return dp[n][index] = points[n][index];
+		for(int task=0;task<3;task++)
+		{
+			if(last != task)
+			{
+				max_val = max(max_val, points[n][task]);
+			}
+		}
+		return max_val;
 	}
-	for(int i=0;i<3;i++)
+	if(dp[n][last] > -1)
+		return dp[n][last];
+	for(int task=0;task<3;task++)
 	{
-		if(i!=index)
-			max_val = max(max_val,points[n][index] + fun(n-1,points,dp,i));
+		if(task!=last)
+			max_val = max(max_val,points[n][task] + fun(n-1,points,dp,task));
 	}
-	return dp[n][index] = max_val;
+	return dp[n][last] = max_val;
 }
 int ninjaTraining(int n, vector<vector<int>> &points)
 {
@@ -23,14 +28,11 @@ int ninjaTraining(int n, vector<vector<int>> &points)
 	int **dp = new int*[n];
 	for(int i=0;i<n;i++)
 	{
-		dp[i] = new int[3];
-		for(int j=0;j<3;j++)
+		dp[i] = new int[4];
+		for(int j=0;j<4;j++)
 		{
 			dp[i][j] = -1;
 		}
 	}
-	int a = fun(n-1,points,dp,0);
-	int b = fun(n-1,points,dp,1);
-	int c = fun(n-1,points,dp,2);
-	return max(a,max(b,c));
+	return fun(n-1,points,dp,3);
 }
